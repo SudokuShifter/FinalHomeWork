@@ -58,7 +58,7 @@ class Student:
         if name == 'name':
             if not value.replace(' ', '').isalpha() or not value.istitle():
                 logger.error(msg=f'{NameStudentError(name, value)}')
-                raise NameStudentError(name, value)
+                return
         super().__setattr__(name, value)
 
     def __getattr__(self, name):
@@ -66,7 +66,7 @@ class Student:
             return self.subjects[name]
         else:
             logger.error(msg=f'{SubjectStudentError(name)}')
-            raise SubjectStudentError(name)
+            return
 
     def __str__(self):
         return f"Студент: {self.name}\nПредметы: {', '.join(self.subjects.keys())}"
